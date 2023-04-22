@@ -25,6 +25,14 @@ class App {
           });
         });
       },
+      onTrendSearch: () => {
+        api.fetchTrendGif().then(({ data }) => {
+          this.setState({
+            data: data || [],
+            page: this.DEFAULT_PAGE,
+          });
+        });
+      },
     });
 
     this.SearchResult = new SearchResult({
@@ -35,7 +43,6 @@ class App {
 
   setState(newState) {
     this.state = newState;
-    console.log(this.state);
     this.SearchResult.setState(newState.data);
   }
 }

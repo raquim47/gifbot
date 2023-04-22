@@ -1,7 +1,8 @@
 class SearchInput {
-  constructor({ $target, onSearch }) {
+  constructor({ $target, onSearch, onTrendSearch }) {
     this.$target = $target;
     this.onSearch = onSearch;
+    this.onTrendSearch = onTrendSearch;
     this.render();
   }
   // 폼 그리기
@@ -9,7 +10,6 @@ class SearchInput {
     const $form = document.createElement('form');
     const $input = document.createElement('input');
     $input.placeholder = '움짤을 검색해보세요!';
-    
 
     $form.appendChild($input);
     $form.appendChild(this.creatSubmitBtn());
@@ -25,7 +25,7 @@ class SearchInput {
     return $form;
   }
   // submit 버튼
-  creatSubmitBtn(){
+  creatSubmitBtn() {
     const $submitBtn = document.createElement('button');
     $submitBtn.setAttribute('aria-label', '검색');
     $submitBtn.innerHTML = `
@@ -33,12 +33,15 @@ class SearchInput {
     `;
     return $submitBtn;
   }
-  // 랜덤 버튼
-  createRandomBtn() {
-    const $randomBtn = document.createElement('button');
-    $randomBtn.className = 'randomBtn';
-    $randomBtn.innerText = '+ 랜덤움짤';
-    return $randomBtn;
+  // 트렌드 버튼
+  createTrendBtn() {
+    const $trendBtn = document.createElement('button');
+    $trendBtn.className = 'trendBtn';
+    $trendBtn.innerText = '🔥 인기움짤';
+    $trendBtn.addEventListener('click', (e) => {
+      this.onTrendSearch();
+    });
+    return $trendBtn;
   }
 
   render() {
@@ -47,7 +50,7 @@ class SearchInput {
 
     const $form = this.createForm();
     $wrapper.appendChild($form);
-    $wrapper.appendChild(this.createRandomBtn());
+    $wrapper.appendChild(this.createTrendBtn());
     this.$target.appendChild($wrapper);
   }
 }

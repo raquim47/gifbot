@@ -4,6 +4,11 @@
   margin: 0;
   padding: 0;
 }
+
+body {
+  background-color: #121212;
+}
+
 /* .searchInput */
 .searchInput {
   display: flex;
@@ -12,6 +17,7 @@
   height: 65px;
   justify-content: center;
   border-bottom: 1px solid #f1f1f2;
+  background-color: white;
 }
 
 .searchInput form {
@@ -48,7 +54,7 @@
   fill: #757575;
 }
 
-.randomBtn {
+.trendBtn {
   border: 1px solid #cacaca;
   background-color: transparent;
   font-size: 16px;
@@ -82,7 +88,6 @@
   border-radius: 4px;
   overflow: hidden;
   width: calc((100% - 45px) / 3);
-  /* border: 1px solid blue; */
 }
 
 .searchResult li img {

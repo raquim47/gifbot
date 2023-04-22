@@ -9,7 +9,6 @@ class SearchResult {
     this.$resultList = document.createElement('ul');
     $wrapper.appendChild(this.$resultList);
     $target.appendChild($wrapper);
-    console.log(this.data);
   }
 
   setState(newData) {
