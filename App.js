@@ -15,7 +15,7 @@ class App {
     this.$target = $target;
 
     this.loading = new Loading({ $target });
-
+    
     this.header = new Header({
       $target,
       onSearch: (keyword) => {
@@ -26,6 +26,8 @@ class App {
             page: this.DEFAULT_PAGE,
           });
           this.loading.hide();
+          // 로컬 스토레지에 저장
+          localStorage.setItem('lastResult', JSON.stringify(data));
         });
       },
       onTrendSearch: () => {
@@ -44,11 +46,21 @@ class App {
       $target,
       initialData: this.state.data,
     });
+
+    this.initLastResult();
   }
 
   setState(newState) {
     this.state = newState;
     this.SearchResult.setState(newState.data);
+  }
+
+  initLastResult() {
+    const lastResult = JSON.parse(localStorage.getItem('lastResult') ?? '[]');
+    this.setState({
+      data: lastResult,
+      page: this.DEFAULT_PAGE,
+    });
   }
 }
 
