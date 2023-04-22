@@ -19,7 +19,7 @@ const request = async (url) => {
 const api = {
   fetchGif: (keyword) => {
     return request(
-      `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${keyword}&limit=25&offset=1&rating=g&lang=ko`
+      `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${keyword}&limit=15&offset=1&rating=g&lang=ko`
     );
   },
 };
