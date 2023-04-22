@@ -1,13 +1,15 @@
-class SearchInput {
+import DarkModeToggle from './DarkModeToggle.js';
+
+class Header {
   constructor({ $target, onSearch, onTrendSearch }) {
-    this.$target = $target;
     this.onSearch = onSearch;
     this.onTrendSearch = onTrendSearch;
-    this.render();
+    this.initDOM($target);
   }
   // 폼 그리기
   createForm() {
     const $form = document.createElement('form');
+    $form.className = 'searchForm';
     const $input = document.createElement('input');
     $input.placeholder = '움짤을 검색해보세요!';
 
@@ -44,14 +46,15 @@ class SearchInput {
     return $trendBtn;
   }
 
-  render() {
-    const $wrapper = document.createElement('section');
-    $wrapper.className = 'searchInput';
+  initDOM($target) {
+    const $wrapper = document.createElement('header');
+    $wrapper.className = 'header';
 
     const $form = this.createForm();
     $wrapper.appendChild($form);
     $wrapper.appendChild(this.createTrendBtn());
-    this.$target.appendChild($wrapper);
+    new DarkModeToggle($wrapper);
+    $target.appendChild($wrapper);
   }
 }
-export default SearchInput;
+export default Header;

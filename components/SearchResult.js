@@ -1,9 +1,15 @@
 class SearchResult {
-  $resultList = null;
-  data = [];
-
   constructor({ $target, initialData }) {
     this.data = initialData;
+    this.initDOM($target);
+  }
+
+  setState(newData) {
+    this.data = newData;
+    this.updateResultList();
+  }
+
+  initDOM($target) {
     const $wrapper = document.createElement('section');
     $wrapper.className = 'searchResult';
     this.$resultList = document.createElement('ul');
@@ -11,12 +17,7 @@ class SearchResult {
     $target.appendChild($wrapper);
   }
 
-  setState(newData) {
-    this.data = newData;
-    this.render();
-  }
-
-  render() {
+  updateResultList() {
     this.$resultList.innerHTML = this.data
       .map(
         (gifData, index) => `
@@ -26,7 +27,11 @@ class SearchResult {
         `
       )
       .join('');
-    // 추가된 부분: 이미지에 마우스 오버 이벤트를 추가합니다.
+    this.addEventListerToItem();
+  }
+
+  // 마우스 오버 이벤트 추가
+  addEventListerToItem() {
     const items = this.$resultList.querySelectorAll('.item img');
     items.forEach((item) => {
       item.addEventListener('mouseover', (event) => {

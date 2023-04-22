@@ -5,22 +5,33 @@
   padding: 0;
 }
 
-body {
-  background-color: #121212;
+:root[color-mode='dark'] {
+  --background: #121212;
+  --textColor: white;
 }
 
-/* .searchInput */
-.searchInput {
+:root[color-mode='light'] {
+  --background: white;
+  --textColor: #000;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--textColor);
+}
+
+/* header */
+.header {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
   height: 65px;
   justify-content: center;
   border-bottom: 1px solid #f1f1f2;
-  background-color: white;
 }
 
-.searchInput form {
+.searchForm {
   display: flex;
   justify-content: space-between;
   min-width: 300px;
@@ -30,11 +41,11 @@ body {
   border-radius: 20px;
 }
 
-.searchInput form:focus-within {
+.searchForm:focus-within {
   border: 1px solid #cacaca;
 }
 
-.searchInput form input {
+.searchForm input {
   background-color: transparent;
   border: none;
   color: #757575;
@@ -42,7 +53,7 @@ body {
   outline: none;
 }
 
-.searchInput form button {
+.searchForm button {
   background-color: transparent;
   border: none;
   padding-left: 10px;
@@ -50,13 +61,13 @@ body {
   cursor: pointer;
 }
 
-.searchInput form button:hover svg {
+.searchForm button:hover svg {
   fill: #757575;
 }
 
 .trendBtn {
   border: 1px solid #cacaca;
-  background-color: transparent;
+  background-color: white;
   font-size: 16px;
   padding: 6px 8px 4px;
   color: #757575;
@@ -64,14 +75,13 @@ body {
   cursor: pointer;
 }
 
-.randomBtn:hover {
+.trendBtn:hover {
   background-color: #f1f1f2;
 }
 
 /* searchResult */
 .searchResult {
   padding: 30px;
-  background-color: black;
 }
 
 .searchResult ul {
@@ -94,6 +104,55 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* loading */
+.loading {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 5px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+/* darkModeToggle */
+.darkModeToggle {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 30px;
+}
+
+.darkModeToggle input {
+  border-radius: 50%;
+}
+
+.darkModeToggle label {
+  font-size: 12px;
+  margin-left: 5px;
+  margin-top: 4px;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media screen and (max-width: 1280px) {
