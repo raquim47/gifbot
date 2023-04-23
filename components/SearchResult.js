@@ -1,7 +1,9 @@
 import Empty from './Empty.js';
+import ImageModal from './ImageModal.js';
+
 class SearchResult {
-  constructor({ $target, initialData, loadMoreOnScroll }) {
-    this.data = initialData;
+  data = [];
+  constructor({ $target, loadMoreOnScroll }) {
     this.loadMoreOnScroll = loadMoreOnScroll;
     this.initDOM($target);
   }
@@ -10,6 +12,7 @@ class SearchResult {
     this.data = newData;
     this.updateResultList();
     this.Empty.show(!newData.length);
+    console.log(this.data);
   }
 
   initDOM($target) {
@@ -18,6 +21,7 @@ class SearchResult {
     this.$resultList = document.createElement('ul');
     $wrapper.appendChild(this.$resultList);
     this.Empty = new Empty($wrapper);
+    this.ImageModal = new ImageModal($target);
     $target.appendChild($wrapper);
   }
 
@@ -51,6 +55,11 @@ class SearchResult {
         const stillSrc = event.target.getAttribute('data-still');
         event.target.setAttribute('src', stillSrc);
       });
+
+      $img.addEventListener('click', (event) => {
+        const imgUrl = event.target.getAttribute('data-src');
+        this.ImageModal.show(imgUrl);
+      });
     });
   }
 
@@ -59,8 +68,6 @@ class SearchResult {
     items.forEach((item) => {
       const itemIndex = Number(item.target.dataset.index);
       if (item.isIntersecting) {
-        // item.target.querySelector('img').src =
-        //   item.target.querySelector('img').dataset.src;
         if (this.data.length - 1 === itemIndex) {
           this.loadMoreOnScroll();
         }

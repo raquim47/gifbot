@@ -5,7 +5,6 @@ class Empty {
   }
 
   initDOM() {
-    console.log(this.$target);
     this.$wrapper = document.createElement('div');
     this.$wrapper.className = 'empty';
     const $text = document.createElement('p');
@@ -15,12 +14,10 @@ class Empty {
 
   show(isShow) {
     if (isShow) {
-      console.log('show')
       if (!this.$target.contains(this.$wrapper)) {
         this.$target.appendChild(this.$wrapper);
       }
     } else {
-      console.log('hide')
       if (this.$target.contains(this.$wrapper)) {
         this.$target.removeChild(this.$wrapper);
       }

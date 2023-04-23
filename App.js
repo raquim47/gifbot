@@ -48,7 +48,6 @@ class App {
 
     this.SearchResult = new SearchResult({
       $target,
-      initialData: this.state.data,
       loadMoreOnScroll: () => {
         console.log('다음');
 
@@ -83,7 +82,7 @@ class App {
 
     this.initLastResult();
   }
-  
+
   setState(newState) {
     this.state = newState;
     this.SearchResult.setState(newState.data);
