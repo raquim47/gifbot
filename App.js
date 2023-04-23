@@ -58,6 +58,11 @@ class App {
             localStorage.getItem('keywordHistory') ?? '[]'
           )[0];
           api.fetchGif(lastkeyword, nextPage).then(({ data }) => {
+            if (data.length === 0) {
+              console.log('데이터가 없습니다.');
+              this.loading.hide();
+              return;
+            }
             const newData = this.state.data.concat(data);
             this.setState({
               data: newData,
@@ -68,6 +73,11 @@ class App {
           });
         } else {
           api.fetchTrendGif(nextPage).then(({ data }) => {
+            if (data.length === 0) {
+              console.log('데이터가 없습니다.');
+              this.loading.hide();
+              return;
+            }
             const newData = this.state.data.concat(data);
             this.setState({
               data: newData,

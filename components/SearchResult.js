@@ -66,8 +66,8 @@ class SearchResult {
   // 스크롤 감지
   listObserver = new IntersectionObserver((items) => {
     items.forEach((item) => {
-      const itemIndex = Number(item.target.dataset.index);
       if (item.isIntersecting) {
+        const itemIndex = Number(item.target.dataset.index);
         if (this.data.length - 1 === itemIndex) {
           this.loadMoreOnScroll();
         }
