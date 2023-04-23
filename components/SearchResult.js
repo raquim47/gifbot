@@ -1,6 +1,7 @@
 class SearchResult {
-  constructor({ $target, initialData }) {
+  constructor({ $target, initialData, loadMoreOnScroll }) {
     this.data = initialData;
+    this.loadMoreOnScroll = loadMoreOnScroll;
     this.initDOM($target);
   }
 
@@ -27,23 +28,41 @@ class SearchResult {
         `
       )
       .join('');
-    this.addEventListerToItem();
+      
+    this.$resultList.querySelectorAll('.item').forEach(($item) => {
+      this.listObserver.observe($item);
+    });
+    this.addEventListerToImg();
   }
 
   // 마우스 오버 이벤트 추가
-  addEventListerToItem() {
-    const items = this.$resultList.querySelectorAll('.item img');
-    items.forEach((item) => {
-      item.addEventListener('mouseover', (event) => {
+  addEventListerToImg() {
+    const imgs = this.$resultList.querySelectorAll('.item img');
+    imgs.forEach(($img) => {
+      $img.addEventListener('mouseover', (event) => {
         const animatedSrc = event.target.getAttribute('data-src');
         event.target.setAttribute('src', animatedSrc);
       });
 
-      item.addEventListener('mouseout', (event) => {
+      $img.addEventListener('mouseout', (event) => {
         const stillSrc = event.target.getAttribute('data-still');
         event.target.setAttribute('src', stillSrc);
       });
     });
   }
+
+  // 스크롤 감지
+  listObserver = new IntersectionObserver((items) => {
+    items.forEach((item) => {
+      const itemIndex = Number(item.target.dataset.index);
+      if (item.isIntersecting) {
+        // item.target.querySelector('img').src =
+        //   item.target.querySelector('img').dataset.src;
+        if (this.data.length - 1 === itemIndex) {
+          this.loadMoreOnScroll();
+        }
+      }
+    });
+  });
 }
 export default SearchResult;
