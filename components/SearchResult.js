@@ -1,3 +1,4 @@
+import Empty from './Empty.js';
 class SearchResult {
   constructor({ $target, initialData, loadMoreOnScroll }) {
     this.data = initialData;
@@ -8,6 +9,7 @@ class SearchResult {
   setState(newData) {
     this.data = newData;
     this.updateResultList();
+    this.Empty.show(!newData.length);
   }
 
   initDOM($target) {
@@ -15,6 +17,7 @@ class SearchResult {
     $wrapper.className = 'searchResult';
     this.$resultList = document.createElement('ul');
     $wrapper.appendChild(this.$resultList);
+    this.Empty = new Empty($wrapper);
     $target.appendChild($wrapper);
   }
 
@@ -28,7 +31,7 @@ class SearchResult {
         `
       )
       .join('');
-      
+
     this.$resultList.querySelectorAll('.item').forEach(($item) => {
       this.listObserver.observe($item);
     });
