@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "lib": ["ES6", "dom"],
+    "strict": true,
+    "outDir": "build",
+  },
+  "include": ["src"],
+}
