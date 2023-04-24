@@ -1,14 +1,13 @@
 # 움짤 검색기
-<hr>
 
 - JIPHY api를 활용한 움짤 검색 사이트.
 - javascript, typescript
 - 프레임 워크, 라이브러리에 의존하지 않고 자바스크립트의 클래스를 활용하는 것에 중점을 둔 프로젝트.
 - [URL: https://raquim47.github.io/gifbot/']
 
-<hr>
-
 <img width="90%" src="https://github.com/raquim47/data/raw/main/gifbot/gifbot.gif?raw=true" />
+
+## 기능 구현
 
 1. Fetch API를 사용하여 움짤 검색 API 호출 및 데이터 처리 구현.
 2. 클래스 컴포넌트를 이용하여 프로젝트 구조와 컴포넌트 생명 주기 관리.
